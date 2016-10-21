@@ -3,6 +3,7 @@ ENV['RACK_ENV'] = 'test'
 require 'minitest/autorun'
 require 'minitest/reporters'
 require 'capybara'
+require 'capybara/poltergeist'
 require 'capybara/dsl'
 require 'byebug'
 
@@ -10,7 +11,7 @@ require File.expand_path('../example/config/environment.rb',  __FILE__)
 require 'rails/test_help'
 
 Capybara.app = Example::Application
-Capybara.current_driver = :selenium
+Capybara.current_driver = ENV['CAPYBARA_DRIVER'] || :poltergeist
 Capybara.default_max_wait_time = 2
 
 Minitest::Reporters.use!(Minitest::Reporters::DefaultReporter.new(color: true))
